@@ -1,0 +1,553 @@
+Date 12/09/2025
+1.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace p1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+        //    for(int i = 0; i < 10; i++)
+        //    {
+        //        if (i == 5)
+        //        {
+        //            break;
+        //        }
+        //        Console.WriteLine(i);
+        //    }
+        //Outer:
+        //    Console.WriteLine("Outside Loop");
+
+
+        //    for (int i = 0; i < 10; i++)
+        //    {
+        //        if (i == 5)
+        //        {
+        //            continue;
+        //        }
+        //        Console.WriteLine(i);
+        //    }
+        //Outer:
+        //    Console.WriteLine("Outside Loop");
+
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (i == 5)
+                {
+                    goto Outer;
+                }
+                Console.WriteLine(i);
+            }
+        Outer:
+            Console.WriteLine("Outside Loop");
+        }
+    }
+}
+
+
+2.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace p2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] num;
+            num = new int[5];
+
+            for (int i = 0; i < num.Length; i++)
+            {
+                Console.WriteLine($"Enter the {i} element");
+                num[i] = int.Parse(System.Console.ReadLine());
+
+            }
+            //Array.Sort(num);
+            //Array.Reverse(num);
+            //Console.WriteLine(Array.IndexOf(num, 10));
+            //Array.Clear(num, 0, 3);--first 3 value replace 0
+            //Array.Copy(src,des,length);
+            foreach (int i in num)
+            {
+                Console.WriteLine(i);
+
+            }
+            System.Console.ReadKey();
+        }
+    }
+}
+
+
+
+3.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace p3
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            var list1=new List<string>(5) { "ok","Hello"};
+            //list1.Add("How");
+            //list1.Insert(2,"fine");
+            //list1.Sort();
+            //list1.Reverse();
+            //list1.Clear();
+            //bool hasElement = list1.Contains("Hello");
+            //list1.IndexOf("OK");
+
+            foreach(var item in list1)
+            {
+                System.Console.WriteLine(item);
+            }
+            list1.Remove("ok");
+
+            foreach(var item in list1)
+            {
+                System.Console.WriteLine(item);
+            }
+            System.Console.WriteLine(list1[list1.Count - 1]);
+        }
+    }
+}
+
+
+
+4.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace p4
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> list = new List<string>() { "Apple","Banana"};
+            string[] x=list.ToArray();
+
+            List<string> new_list = new List<string>();
+            new_list=x.ToList();
+            Console.WriteLine(new_list[0]);
+        }
+    }
+}
+
+
+5.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace p5
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<int, string> dict = new Dictionary<int, string>() { { 1, "Hello" }, { 2, "Hi" } };
+            var dict1 = new Dictionary<int, string>();
+            dict1.Add(3, "Hello");
+            dict1.Add(4, "Hii");
+            System.Console.WriteLine(dict1[3]);
+
+            foreach (KeyValuePair<int, string> kvp in dict)
+            {
+                Console.WriteLine($"key : {kvp.Key},value : {kvp.Value}");
+            }
+
+            string x = null;
+            x = dict1.TryGetValue(1, out string y) ? y : (string)null;
+            System.Console.WriteLine(x);
+        }
+    }
+}
+
+
+6.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace p6
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string, double> dict = new Dictionary<string, double>() { { "Srushti", 89.8 }, { "yashvi", 78.8 }};
+            System.Console.WriteLine("Enter Student Name:");
+            string n = Console.ReadLine();
+
+            foreach (KeyValuePair<string, Double> kvp in dict)
+            {
+
+                if (kvp.Key == n)
+                {
+                    Console.WriteLine(kvp.Value);
+                }
+            }
+        }
+    }
+}
+
+
+7.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace p7
+{
+    class car
+    {
+        public int number;
+        public string name;
+        public void Display()
+        {
+            System.Console.WriteLine(number + " " + name);
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            car c1 = new car();
+            car c2 = new car();
+
+            c1.number = 1234;
+            c1.name = "Srushti";
+            c2.number = 5678;
+            c2.name = "Yashvi";
+            c1.Display();
+            c2.Display();
+        }
+    }
+}
+
+
+8.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace p8
+{
+    class Animal
+    {
+        public virtual void speak()
+        {
+            Console.WriteLine("Animal Speaks");
+        }
+    }
+
+    class Dog : Animal
+    {
+        public override void speak()
+        {
+            Console.WriteLine("Bark");
+        }
+        public void run()
+        {
+            Console.WriteLine("Faster");
+        }
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                Animal a = new Dog();
+                a.speak();
+                //a.run();
+                ((Dog)a).run();
+            }
+        }
+    }
+}
+
+
+
+Date 15/09/2025
+1.
+using P9;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace P9
+{
+    class Player
+    {
+        //private int PlayerHealth;
+        public int PlayerHealth;
+        { get { return PlayerHealth; }
+            set
+            {
+                if (value < 0)
+                {
+                    Console.WriteLine("Health must be greater than 0");
+                    PlayerHealth = 1;
+                }
+                else
+                {
+                    PlayerHealth = value;
+                }
+                public Player(int initialHealth)
+        {
+            PlayerHealth = initialHealth;
+        }
+        public void TakeDamage(int damage)
+        {
+            Console.WriteLine($"Taking {damage} Damage");
+            PlayerHealth -= damage;
+        }
+        public void heal(int amount)
+        {
+            Console.WriteLine($"Healthy {amount} health");
+            PlayerHealth += amount;
+        }
+        public void displayHealth()
+        {
+            Console.WriteLine($"Current Health {PlayerHealth}");
+        }
+    }
+}   
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+        Player p1 = new Player(20);
+        p1.displayHealth();
+        //Call all the methods
+    }
+}
+}
+
+
+2.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace P10
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> numbers = new List<int> { 1,2,3,4,5};
+            var evenNums = from n in numbers where n % 2 == 0 select n;
+            System.Console.WriteLine($"Min Numbers :- {numbers.Min()}");
+            System.Console.WriteLine($"Max Numbers :- {numbers.Max()}");
+            System.Console.WriteLine($"Sum :- {numbers.Sum()}");
+            System.Console.WriteLine(String.Join(".",evenNums));
+        }
+    }
+}
+
+
+3.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace P11
+{
+    class Student
+    {
+        public String name {  get; set; }
+        public int marks { get; set; }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Student> students = new List<Student> { new Student { name="Amit",marks=85},
+                                                         new Student { name="Ravi",marks=60},
+                                                         new Student { name="Neha",marks=92},
+                                                         new Student { name="Raj",marks=45}};
+            var toppers = students.Where(s => s.marks >= 80);
+            Console.WriteLine("Toppers :- ");
+            foreach(var s in toppers) Console.WriteLine($"{s.name} - {s.marks}");
+            var sorted = students.OrderBy(s => s.marks).ThenBy(s=>s.name);
+            Console.WriteLine("Sorted by marks then name :- ");
+            foreach (var s in sorted) Console.WriteLine($"{s.name} - {s.marks}");
+        }
+    }
+}
+
+
+4.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace P12
+{
+    public delegate void Notify(String s);
+    internal class Program
+    {
+        static void NotifyMethod(String str)
+        {
+            Console.WriteLine(str);
+        }
+        static void NotifyMethod1(String str)
+        {
+            Console.WriteLine(str);
+        }
+        static void Main(string[] args)
+        {
+            Notify nt = new Notify(NotifyMethod);
+            nt += NotifyMethod1;
+            nt("Hello");
+        }
+    }
+}
+
+
+
+5.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace P13
+{
+    public delegate void ProcessOrder(String s);
+    internal class Program
+    {
+        static void Prepare(String prod) => Console.WriteLine($"Preparing... {prod}");
+        static void Pack(String prod) => Console.WriteLine($"Packing... {prod}");
+        static void Ship(String prod) => Console.WriteLine($"Shiping... {prod}");
+
+
+        static void Main(string[] args)
+        {
+            ProcessOrder p1 = Prepare;
+            p1 += Pack;
+            p1 += Ship;
+            p1("Laptop");
+        }
+    }
+}
+
+
+
+6.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace P14
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Action greed = () => Console.WriteLine("Hello");
+            greed();
+
+            Func<int, int, int> add = (x, y) => x + y;
+            int result = add(5, 15);
+            Console.WriteLine(result);
+
+            Predicate<int> isEven = num => num % 2 == 0;
+            Console.WriteLine(isEven(4));
+            Console.WriteLine(isEven(7));
+        }
+    }
+}
+
+
+7.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace P15
+{
+    internal class Program
+    {
+        public static String name = "Chocalate";
+        public static double price = 200.00;
+        public static int quantity = 6;
+        public static double bill = 0;
+        static void Main(string[] args)
+        {
+            Action greed = () => Console.WriteLine($"Product name :- {name}, Product price :- {price}, Product Quantity :- {quantity}");
+            greed();
+
+            Func<double, int, double> genrate = (x, y) => x * y;
+            bill = genrate(price,quantity);
+            Console.WriteLine(bill);
+
+            Predicate<double> Greater = num => num >= 1000;
+            Console.WriteLine(Greater(bill));
+        }
+    }
+}
+
+
+8.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace P16
+{
+    internal class Program
+    {
+        delegate void GreetDelegate(String str);
+        static void Main(string[] args)
+        {
+            GreetDelegate greet = delegate (String name)
+            {
+                Console.WriteLine("Hello " + name);
+            };
+            greet("Suhani");
+        }
+    }
+}
