@@ -1,0 +1,308 @@
+16/09/25
+
+1.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace P17
+{
+    public delegate void AlarmHandler(String loc);
+
+    class AlarmSystem
+    {
+        public event AlarmHandler OnAlarmTriggered;
+        public void TriggerAlarm(String loc)
+        {
+            Console.WriteLine("Alarm Triggered");
+            OnAlarmTriggered.Invoke(loc);
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            AlarmSystem a = new AlarmSystem();
+
+            a.OnAlarmTriggered += loc => Console.WriteLine($"Security called for {loc}");
+
+            a.OnAlarmTriggered += loc => Console.WriteLine($"Log saved for {loc}");
+
+            a.OnAlarmTriggered += loc => Console.WriteLine($"Sprinkles activated for {loc}");
+
+            a.TriggerAlarm("main Gate");
+        }
+    }
+}
+
+
+
+--->>UI
+2.
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace W1
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            MessageBox.Show("Form is Loading");
+            this.BackColor = Color.Green;
+            lbl_wc.Text="Welcome! Today is" + DateTime.Now.ToLongDateString();
+            lbl_wc.BackColor = Color.Red;
+            lbl_wc.ForeColor = Color.White;  // Font color
+
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            MessageBox.Show("Form is showing");
+            this.BackColor = Color.Blue;
+        }
+    }
+}
+
+
+
+3.
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace W2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            MessageBox.Show("Form is Loading");
+            lbl_lf.Text = "Login Form";
+            lbl_uname.Text = "UserName";
+            lbl_pass.Text = "Password";
+            btn_submit.Text = "Submit";
+            btn_clear.Text = "Clear";
+        }
+
+        private void btn_submit_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Button Clicked");
+            String username = tb_uname.Text;
+            String password = tb_pass.Text;
+
+            if (username == "Admin" && password == "123")
+            {
+                MessageBox.Show("Login Success");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Login Failed");
+            }
+        }
+
+        private void btn_submit_MouseEnter(object sender, EventArgs e)
+        {
+            btn_submit.BackColor = Color.Gray;
+        }
+
+        private void btn_submit_MouseLeave(object sender, EventArgs e)
+        {
+            btn_submit.BackColor = Color.Green;
+        }
+
+        private void btn_submit_MouseHover(object sender, EventArgs e)
+        {
+            btn_submit.BackColor = Color.Yellow;
+        }
+
+        private void tb_uname_Leave(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(tb_uname.Text) || tb_uname.Text.Length != 4 || !tb_uname.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("Enter valid Username", "Invalid Username", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tb_uname.Focus();
+            }
+        }
+
+        private void tb_uname_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_uname_Validated(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_uname_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void tb_uname_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_pass_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_pass_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_pass_Validated(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_pass_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void tb_pass_Enter(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
+
+
+18/09/25
+
+
+4.
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Form2
+{
+    public partial class Form2 : Form
+    {
+        public Form2()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            MessageBox.Show("Form is loading.");
+	    tb_pass.UseSystemPasswordChar = true;
+
+        }
+
+        private void btn_login_Click(object sender, EventArgs e)
+        {
+            String un = tb_uname.Text;
+            String pw = tb_pass.Text;
+            if(un == "Admin" && pw == "1234")
+            {
+                MessageBox.Show("Login Successful.");
+                MainForm mf = new MainForm(un);
+                mf.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Creds.");
+            }
+        }
+	
+        private void cb_show_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_show_Checked)
+            {
+                tb_pass.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                tb_pass.UseSystemPasswordChar = true;
+            }
+        }
+
+        private void btn_reset_Click(object sender, EventArgs e)
+        {
+            tb_uname.Text = "";
+            tb_pass.Text = "";
+        }
+    }
+}
+
+MainForm
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Text;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Form2
+{
+    public partial class MainForm : Form
+    {
+        private String _un;
+        public MainForm(String un)
+        {
+            InitializeComponent();
+            _un = un;
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            MessageBox.Show("Loading Mainform.");
+            lbl_user.Text = "Welcome " + _un + " Today is " + DateTime.Now.ToLongDateString();
+        }
+    }
+}
+
+
+5.
