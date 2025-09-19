@@ -1,0 +1,176 @@
+19/9/25
+
+1.
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Form3
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        DateTime thatTime;
+        bool isRunning;
+        TimeSpan elapsed;
+        TimeSpan lastTime;
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            MessageBox.Show("Form is Loading.......");
+            cb_yes.ThreeState = true;
+
+            timer3.Interval = 1000;
+            timer3.Enabled = true;
+            lbl_timer.Text = "00:00:00";
+        }
+
+        private void cb_yes_CheckStateChanged(object sender, EventArgs e)
+        {
+            switch (cb_yes.CheckState)
+            {
+                case CheckState.Checked:
+                    MessageBox.Show("Yes");
+                    break;
+
+                case CheckState.Unchecked:
+                    MessageBox.Show("No");
+                    break;
+
+                case CheckState.Indeterminate:
+                    MessageBox.Show("May be");
+                    break;
+            }
+        }
+
+        private void RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_yes.Checked)
+            {
+                MessageBox.Show("Yes");
+            }
+            if (rb_no.Checked)
+            {
+                MessageBox.Show("No");
+            }
+
+        }
+
+        private void btn_start_Click(object sender, EventArgs e)
+        {
+            isRunning= true;    
+            thatTime=DateTime.Now;
+            btn_start.Enabled = false;
+            btn_pause.Enabled = true;
+        }
+
+        private void btn_pause_Click(object sender, EventArgs e)
+        {
+            lastTime = elapsed;
+            lbl_timer.Text = elapsed.ToString(@"hh\:mm\:ss");
+            isRunning= false;
+            btn_pause.Enabled=false;
+            btn_start.Enabled=true;
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            lbl_timer.Text = DateTime.Now.ToString("hh:mm:ss");
+            if (isRunning)
+            {
+                elapsed = DateTime.Now - thatTime + lastTime;
+                lbl_timer.Text = elapsed.ToString(@"hh\:mm\:ss");
+            }
+        }
+    }
+}
+
+
+
+
+2.
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace CountDown
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        bool isstart;
+        int counter = 20;
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            lblcounter.Text = "00";
+            timer1.Interval = 1000;
+            cmb_fruits.Items.Add("Apple");
+            cmb_fruits.Items.Add("Mango");
+            cmb_fruits.Items.AddRange(new String[] { "Orange", "Kiwi" });
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblcounter.Visible=!lblcounter.Visible;
+            if (isstart)
+            {
+                  counter--;
+                  lblcounter.Text = counter.ToString();
+            }
+
+            if (counter == 0)
+            {
+                timer1.Stop();
+                MessageBox.Show("Time Up!");
+            }
+        }
+
+        private void btn_start_Click(object sender, EventArgs e)
+        {
+            isstart=true;
+            timer1.Start();
+            if (counter == 0)
+            {
+                counter = 20;
+            }
+        }
+
+        private void btn_pause_Click(object sender, EventArgs e)
+        {
+            isstart =false;
+            timer1.Stop();
+        }
+
+        private void btn_reset_Click(object sender, EventArgs e)
+        {
+            counter = 20;
+            isstart = true;
+            timer1.Start();
+        }
+
+        private void cmb_fruits_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("You have selected " + cmb_fruits.SelectedItem.ToString());
+        }
+    }
+}
